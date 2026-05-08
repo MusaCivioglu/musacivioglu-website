@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #0f766e; /* teal-700 */
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 22%, white);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  html,
+  body {
+    background: white !important;
+    font-family: "Times New Roman", Times, serif !important;
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+    color: black !important;
+  }
+
+  header,
+  footer,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  #cv-content {
+    display: block !important;
+  }
+
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 10px !important;
+  }
+
+  h1 {
+    font-size: 24pt !important;
+  }
+
+  h2 {
+    font-size: 18pt !important;
+  }
+
+  h3 {
+    font-size: 14pt !important;
+  }
+
+  p,
+  li,
+  span,
+  a,
+  div {
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+  }
+
+  img {
+    max-width: 75% !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    display: block !important;
+    break-inside: avoid;
+  }
+
+  .hero-image,
+  .profile-image {
+    max-width: 220px !important;
+    margin: 0 auto !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: black !important;
+  }
+
+  * {
+    box-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

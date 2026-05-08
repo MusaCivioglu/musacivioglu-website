@@ -1,6 +1,6 @@
 import type { Content, Locale } from "@/lib/content";
 
-const LS_PREFIX = "musa_translate_cache_v2";
+const LS_PREFIX = "musa_translate_cache_v3";
 
 const DO_NOT_TRANSLATE_KEYS = new Set([
   "image",
@@ -46,7 +46,10 @@ const MANUAL_TRANSLATIONS: Record<string, Record<string, string>> = {
   },
 };
 
-function getManualTranslation(text: string, target: Locale): string | null {
+function getManualTranslation(
+  text: string,
+  target: Locale
+): string | null {
   if (target === "tr") return text;
   return MANUAL_TRANSLATIONS[target]?.[text] ?? null;
 }
@@ -68,33 +71,68 @@ function readCache(target: Locale, text: string): string | null {
   }
 }
 
-function writeCache(target: Locale, text: string, translated: string) {
+function writeCache(
+  target: Locale,
+  text: string,
+  translated: string
+) {
   if (typeof window === "undefined") return;
 
   const manual = getManualTranslation(text, target);
   if (manual) return;
 
   try {
-    window.localStorage.setItem(getCacheKey(target, text), translated);
+    window.localStorage.setItem(
+      getCacheKey(target, text),
+      translated
+    );
   } catch {
     // ignore quota / blocked storage
   }
 }
 
-async function translateViaApi(texts: string[], target: Locale): Promise<string[]> {
-  const res = await fetch("/api/translate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ texts, targetLang: target }),
-  });
+async function translateViaApi(
+  texts: string[],
+  target: Locale
+): Promise<string[]> {
+  try {
+    const res = await fetch("/api/translate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        texts,
+        targetLang: target,
+      }),
+    });
 
-  if (!res.ok) throw new Error(`Translation failed: ${res.status}`);
+    if (!res.ok) {
+      console.warn("Translation API failed:", res.status);
+      return texts;
+    }
 
-  const data = (await res.json()) as { translations: string[] };
-  return data.translations;
+    const data = (await res.json()) as {
+      translations?: string[];
+    };
+
+    if (!Array.isArray(data.translations)) {
+      return texts;
+    }
+
+    return data.translations.map((translation, index) =>
+      translation?.trim() ? translation : texts[index]
+    );
+  } catch (error) {
+    console.warn("Translation API error:", error);
+    return texts;
+  }
 }
 
-export async function translateText(text: string, target: Locale): Promise<string> {
+export async function translateText(
+  text: string,
+  target: Locale
+): Promise<string> {
   if (target === "tr") return text;
 
   const manual = getManualTranslation(text, target);
@@ -113,7 +151,11 @@ function shouldSkipKey(key: string) {
   return DO_NOT_TRANSLATE_KEYS.has(key);
 }
 
-function collectStrings(node: unknown, out: Set<string>, parentKey?: string) {
+function collectStrings(
+  node: unknown,
+  out: Set<string>,
+  parentKey?: string
+) {
   if (typeof node === "string") {
     if (!parentKey || !shouldSkipKey(parentKey)) {
       if (node.trim()) out.add(node);
@@ -122,14 +164,18 @@ function collectStrings(node: unknown, out: Set<string>, parentKey?: string) {
   }
 
   if (Array.isArray(node)) {
-    for (const item of node) collectStrings(item, out, parentKey);
+    for (const item of node) {
+      collectStrings(item, out, parentKey);
+    }
     return;
   }
 
   if (node && typeof node === "object") {
-    for (const [k, v] of Object.entries(node as Record<string, unknown>)) {
-      if (shouldSkipKey(k)) continue;
-      collectStrings(v, out, k);
+    for (const [key, value] of Object.entries(
+      node as Record<string, unknown>
+    )) {
+      if (shouldSkipKey(key)) continue;
+      collectStrings(value, out, key);
     }
   }
 }
@@ -150,18 +196,20 @@ function replaceStrings(
   }
 
   if (Array.isArray(node)) {
-    return node.map((x) => replaceStrings(x, map, target, parentKey));
+    return node.map((item) =>
+      replaceStrings(item, map, target, parentKey)
+    );
   }
 
   if (node && typeof node === "object") {
     const obj = node as Record<string, unknown>;
     const next: Record<string, unknown> = {};
 
-    for (const [k, v] of Object.entries(obj)) {
-      if (shouldSkipKey(k)) {
-        next[k] = v;
+    for (const [key, value] of Object.entries(obj)) {
+      if (shouldSkipKey(key)) {
+        next[key] = value;
       } else {
-        next[k] = replaceStrings(v, map, target, k);
+        next[key] = replaceStrings(value, map, target, key);
       }
     }
 
@@ -185,32 +233,33 @@ export async function translateContent(
   const missing: string[] = [];
   const map = new Map<string, string>();
 
-  for (const s of unique) {
-    const manual = getManualTranslation(s, target);
+  for (const sourceText of unique) {
+    const manual = getManualTranslation(sourceText, target);
 
     if (manual) {
-      map.set(s, manual);
+      map.set(sourceText, manual);
       continue;
     }
 
-    const cached = readCache(target, s);
+    const cached = readCache(target, sourceText);
 
     if (cached) {
-      map.set(s, cached);
+      map.set(sourceText, cached);
     } else {
-      missing.push(s);
+      missing.push(sourceText);
     }
   }
 
   if (missing.length) {
     const translations = await translateViaApi(missing, target);
 
-    missing.forEach((src, i) => {
-      const manual = getManualTranslation(src, target);
-      const translated = manual ?? translations[i] ?? src;
+    missing.forEach((sourceText, index) => {
+      const manual = getManualTranslation(sourceText, target);
+      const translated =
+        manual ?? translations[index] ?? sourceText;
 
-      map.set(src, translated);
-      writeCache(target, src, translated);
+      map.set(sourceText, translated);
+      writeCache(target, sourceText, translated);
     });
   }
 

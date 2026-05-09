@@ -15,7 +15,9 @@ type NavKey =
   | "education"
   | "languages"
   | "skills"
+  | "volunteer"
   | "contact";
+  
 
 export function Navbar() {
   const { locale, setLocale, t, isTranslating } = useLanguage();
@@ -31,6 +33,7 @@ export function Navbar() {
         ["education", t.nav.items.education],
         ["languages", t.nav.items.languages],
         ["skills", t.nav.items.skills],
+        ["volunteer", t.nav.items.volunteer],
         ["contact", t.nav.items.contact],
       ] as Array<[NavKey, string]>,
     [t]

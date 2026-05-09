@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { LanguageProvider } from "@/components/LanguageProvider";
 const siteUrl = "https://musacivioglu.com";
 
 export const metadata: Metadata = {
@@ -114,7 +114,9 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
 
         <script
           type="application/ld+json"

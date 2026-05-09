@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
   title: "Musa Çivioğlu | Professional Translator & English Teacher",
   description:
-    "Official portfolio website of Musa Çivioğlu. Professional translator, English teacher, Pura Tercüme founder, and multilingual language professional.",
+    "Professional translator, English teacher, founder of Pura Tercüme, and multilingual language professional.",
 
   keywords: [
     "Musa Çivioğlu",
@@ -36,17 +36,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Musa Çivioğlu | Professional Translator & English Teacher",
     description:
-      "Professional translator, English teacher, Pura Tercüme founder, and multilingual language professional.",
+      "Professional translator, English teacher, founder of Pura Tercüme, and multilingual language professional.",
     url: siteUrl,
     siteName: "Musa Çivioğlu",
     locale: "tr_TR",
     type: "profile",
     images: [
       {
-        url: "/profile-photo.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Musa Çivioğlu",
+        alt: "Musa Çivioğlu | Professional Translator & English Teacher",
       },
     ],
   },
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Musa Çivioğlu | Professional Translator & English Teacher",
     description:
-      "Professional translator, English teacher, Pura Tercüme founder, and multilingual language professional.",
-    images: ["/profile-photo.jpg"],
+      "Professional translator, English teacher, founder of Pura Tercüme, and multilingual language professional.",
+    images: ["/og-image.png"],
   },
 
   robots: {
@@ -82,7 +82,7 @@ const personJsonLd = {
   image: `${siteUrl}/profile-photo.jpg`,
   jobTitle: ["Professional Translator", "English Teacher"],
   description:
-    "Professional translator, English teacher, Pura Tercüme founder, and multilingual language professional.",
+    "Professional translator, English teacher, founder of Pura Tercüme, and multilingual language professional.",
   worksFor: {
     "@type": "Organization",
     name: "Pura Tercüme",
@@ -103,9 +103,7 @@ const personJsonLd = {
     },
   ],
   knowsLanguage: ["Turkish", "English", "Italian", "Spanish", "French"],
-  sameAs: [
-    "https://github.com/MusaCivioglu"
-  ],
+  sameAs: ["https://github.com/MusaCivioglu"],
 };
 
 export default function RootLayout({

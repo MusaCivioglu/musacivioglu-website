@@ -1,56 +1,111 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl = "https://musacivioglu.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+
   title: "Musa Çivioğlu | Professional Translator & English Teacher",
   description:
-    "Official portfolio website of Musa Çivioğlu. Professional translation services, English teaching, multilingual communication, and international projects.",
+    "Official portfolio website of Musa Çivioğlu. Professional translator, English teacher, Pura Tercüme founder, and multilingual language professional.",
 
   keywords: [
     "Musa Çivioğlu",
     "Musa Civioglu",
     "Pura Tercüme",
-    "translator",
-    "english teacher",
     "professional translator",
+    "English teacher",
+    "multilingual translator",
     "Antalya translator",
     "sworn translation",
     "yeminli tercüme",
     "çevirmen",
     "İngilizce öğretmeni",
+    "ELT",
   ],
 
-  authors: [{ name: "Musa Çivioğlu" }],
-
+  authors: [{ name: "Musa Çivioğlu", url: siteUrl }],
   creator: "Musa Çivioğlu",
+  publisher: "Musa Çivioğlu",
 
-  metadataBase: new URL("https://musacivioglu.com"),
+  alternates: {
+    canonical: siteUrl,
+  },
 
   openGraph: {
-    title: "Musa Çivioğlu",
+    title: "Musa Çivioğlu | Professional Translator & English Teacher",
     description:
-      "Professional Translator & English Teacher Portfolio",
-    url: "https://musacivioglu.com",
+      "Professional translator, English teacher, Pura Tercüme founder, and multilingual language professional.",
+    url: siteUrl,
     siteName: "Musa Çivioğlu",
     locale: "tr_TR",
-    type: "website",
+    type: "profile",
+    images: [
+      {
+        url: "/profile-photo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Musa Çivioğlu",
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Musa Çivioğlu",
+    title: "Musa Çivioğlu | Professional Translator & English Teacher",
     description:
-      "Professional Translator & English Teacher Portfolio",
+      "Professional translator, English teacher, Pura Tercüme founder, and multilingual language professional.",
+    images: ["/profile-photo.jpg"],
   },
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 
   icons: {
     icon: "/favicon.ico",
   },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Musa Çivioğlu",
+  alternateName: ["Musa Civioglu", "Musa Çivioglu"],
+  url: siteUrl,
+  image: `${siteUrl}/profile-photo.jpg`,
+  jobTitle: ["Professional Translator", "English Teacher"],
+  description:
+    "Professional translator, English teacher, Pura Tercüme founder, and multilingual language professional.",
+  worksFor: {
+    "@type": "Organization",
+    name: "Pura Tercüme",
+    url: "https://puratercume.com",
+  },
+  founder: {
+    "@type": "Organization",
+    name: "Pura Tercüme",
+  },
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Hasan Kalyoncu University",
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Anadolu University",
+    },
+  ],
+  knowsLanguage: ["Turkish", "English", "Italian", "Spanish", "French"],
+  sameAs: [
+    "https://github.com/MusaCivioglu"
+  ],
 };
 
 export default function RootLayout({
@@ -60,43 +115,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body>{children}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Person",
-                name: "Musa Çivioğlu",
-                alternateName: "Musa Civioglu",
-                url: "https://musacivioglu.com",
-                image: "https://musacivioglu.com/profile.jpg",
-                jobTitle: [
-                  "Professional Translator",
-                  "English Teacher",
-                ],
-                worksFor: {
-                  "@type": "Organization",
-                  name: "Pura Tercüme",
-                },
-                alumniOf: {
-                  "@type": "CollegeOrUniversity",
-                  name: "Hasan Kalyoncu University",
-                },
-                knowsLanguage: [
-                  "Turkish",
-                  "English",
-                  "Italian",
-                  "Spanish",
-                ],
-                sameAs: [
-                  "https://www.linkedin.com/",
-                  "https://github.com/MusaCivioglu",
-                ],
-              }),
-            }}
-          />
+      <body>
+        {children}
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd),
+          }}
+        />
       </body>
     </html>
   );

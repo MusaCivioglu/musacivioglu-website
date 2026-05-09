@@ -13,7 +13,7 @@ export const LOCALES: { code: Locale; label: string }[] = [
  */
 export const trContent = {
   nav: {
-    name: "Musa Çivioğlu",
+    name: "MUSA ÇİVİOĞLU",
     items: {
       about: "Hakkımda",
       experience: "Deneyim",

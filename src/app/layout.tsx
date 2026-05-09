@@ -60,7 +60,44 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body>{children}</body>
+      <body>{children}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Musa Çivioğlu",
+                alternateName: "Musa Civioglu",
+                url: "https://musacivioglu.com",
+                image: "https://musacivioglu.com/profile.jpg",
+                jobTitle: [
+                  "Professional Translator",
+                  "English Teacher",
+                ],
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Pura Tercüme",
+                },
+                alumniOf: {
+                  "@type": "CollegeOrUniversity",
+                  name: "Hasan Kalyoncu University",
+                },
+                knowsLanguage: [
+                  "Turkish",
+                  "English",
+                  "Italian",
+                  "Spanish",
+                ],
+                sameAs: [
+                  "https://www.linkedin.com/",
+                  "https://github.com/MusaCivioglu",
+                ],
+              }),
+            }}
+          />
+
+      </body>
     </html>
   );
 }

@@ -10,6 +10,7 @@ import { Projects } from "@/components/Projects";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Container } from "@/components/ui";
+import { Volunteer } from "@/components/Volunteer";
 
 export default function Page() {
   return (
@@ -25,6 +26,7 @@ export default function Page() {
               <Languages />
               <Skills />
               <Certificates />
+              <Volunteer />
               <Projects />
               <Contact />
             </Container>"

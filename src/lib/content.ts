@@ -214,38 +214,7 @@ export const trContent = {
         image: "/certificates/teach-english-now.jpg",
         link: "#",
       },
-      volunteer: {
-                    title: "Sivil Toplum Kuruluş Faaliyetleri",
-                    items: [
-                      {
-                        title: "Türk Kızılay - Manavgat Yangınları",
-                        date: "2021",
-                        description:
-                          "Türk Kızılay ailesi ile tanışmama katkı sağladı.",
-                      },
-
-                      {
-                        title: "Genç Kızılay HKÜ Topluluk Başkanlığı",
-                        date: "2021 - 2023",
-                        description:
-                          "Üniversite topluluk başkanlığını yürüttüm ve bu süre zarfında onlarca etkinlik planlamasında katkıda bulundum.",
-                      },
-
-                      {
-                        title: "Genç Kızılay Gaziantep İl Yönetimi",
-                        date: "2023 - 2024",
-                        description:
-                          "Gaziantep Üniversitesi, Hasan Kalyoncu Üniversitesi ve Gaziantep İslam Bilim ve Teknoloji Üniversitesi'ndeki toplulukların işleyişlerini, faaliyetlerini ve genel durumlarını takip ederek düzenli raporlama süreçlerinde görev aldım. Etkinlik planlama ve onay süreçlerini yönettim.",
-                      },
-
-                      {
-                        title: "Genç Kızılay Şahinbey (Gaziantep) İlçe Başkanlığı",
-                        date: "2024 - 2024",
-                        description:
-                          "Şahinbey ilçesinde sosyal yardımlaşma faaliyetleri, etkinlik organizasyonları ve toplumsal farkındalık çalışmaları yürüttüm.",
-                      },
-                    ],
-                  },
+ 
       {
   title: "ECDL Full Standart – Avrupa Bilgisayar Yetkinlik Sertifikası",
   issuer: "ECDL",
@@ -308,6 +277,38 @@ export const trContent = {
 
     ],
   },
+       volunteer: {
+                    title: "Sivil Toplum Kuruluş Faaliyetleri",
+                    items: [
+                      {
+                        title: "Türk Kızılay - Manavgat Yangınları",
+                        date: "2021",
+                        description:
+                          "Türk Kızılay ailesi ile tanışmama katkı sağladı.",
+                      },
+
+                      {
+                        title: "Genç Kızılay HKÜ Topluluk Başkanlığı",
+                        date: "2021 - 2023",
+                        description:
+                          "Üniversite topluluk başkanlığını yürüttüm ve bu süre zarfında onlarca etkinlik planlamasında katkıda bulundum.",
+                      },
+
+                      {
+                        title: "Genç Kızılay Gaziantep İl Yönetimi",
+                        date: "2023 - 2024",
+                        description:
+                          "Gaziantep Üniversitesi, Hasan Kalyoncu Üniversitesi ve Gaziantep İslam Bilim ve Teknoloji Üniversitesi'ndeki toplulukların işleyişlerini, faaliyetlerini ve genel durumlarını takip ederek düzenli raporlama süreçlerinde görev aldım. Etkinlik planlama ve onay süreçlerini yönettim.",
+                      },
+
+                      {
+                        title: "Genç Kızılay Şahinbey (Gaziantep) İlçe Başkanlığı",
+                        date: "2024 - 2024",
+                        description:
+                          "Şahinbey ilçesinde sosyal yardımlaşma faaliyetleri, etkinlik organizasyonları ve toplumsal farkındalık çalışmaları yürüttüm.",
+                      },
+                    ],
+                  },
   projects: {
     title: "Projeler / İş Odağı",
     items: [

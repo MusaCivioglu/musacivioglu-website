@@ -20,6 +20,7 @@ export const trContent = {
       education: "Eğitim",
       languages: "Diller",
       skills: "Yetenekler",
+      volunteer: "Faaliyetler",
       contact: "İletişim",
     },
     downloadCv: "CV İndir",

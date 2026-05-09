@@ -1,22 +1,66 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { LanguageProvider } from "@/components/LanguageProvider";
 
 export const metadata: Metadata = {
-  title: "Musa Çivioğlu | CV & Portfolio",
+  title: "Musa Çivioğlu | Professional Translator & English Teacher",
   description:
-    "ELT Student, Founder of Pura Tercüme, multilingual translator. One-page CV and portfolio.",
+    "Official portfolio website of Musa Çivioğlu. Professional translation services, English teaching, multilingual communication, and international projects.",
+
+  keywords: [
+    "Musa Çivioğlu",
+    "Musa Civioglu",
+    "Pura Tercüme",
+    "translator",
+    "english teacher",
+    "professional translator",
+    "Antalya translator",
+    "sworn translation",
+    "yeminli tercüme",
+    "çevirmen",
+    "İngilizce öğretmeni",
+  ],
+
+  authors: [{ name: "Musa Çivioğlu" }],
+
+  creator: "Musa Çivioğlu",
+
+  metadataBase: new URL("https://musacivioglu.com"),
+
+  openGraph: {
+    title: "Musa Çivioğlu",
+    description:
+      "Professional Translator & English Teacher Portfolio",
+    url: "https://musacivioglu.com",
+    siteName: "Musa Çivioğlu",
+    locale: "tr_TR",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Musa Çivioğlu",
+    description:
+      "Professional Translator & English Teacher Portfolio",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="h-full scroll-smooth">
-      <body className="min-h-full bg-white text-slate-900 antialiased">
-        <LanguageProvider>{children}</LanguageProvider>
-      </body>
+    <html lang="tr">
+      <body>{children}</body>
     </html>
   );
 }
-
